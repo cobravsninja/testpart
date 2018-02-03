@@ -1,3 +1,5 @@
+CREATE OR REPLACE FUNCTION create_life_partitions_current_month()
+    RETURNS void AS $$
 	DECLARE
 		_from text;
 		_to text;
@@ -13,5 +15,4 @@
 			EXECUTE 'CREATE TABLE ' || _part || 's' || i || ' PARTITION OF ' || _part || ' FOR VALUES IN (' || i || ')';
 		END LOOP;
 	END;
-
-
+$$ LANGUAGE plpgsql;
